@@ -12,9 +12,11 @@ use strict;
 use vars qw( @ISA $VERSION );
 @ISA = qw( Tk::VTree );
 
-$VERSION = "0.04";
+$VERSION = "0.05";
 
 Construct Tk::Widget 'Tree';
+
+sub Tk::Widget::ScrlTree { shift->Scrolled('Tree' => @_) }
 
 sub Populate {
     my( $w, $args ) = @_;
@@ -119,10 +121,9 @@ Tk::Tree - Create and manipulate Tree widgets
 
 =head1 SUPER-CLASS
 
-The B<Tree> class is derived from the scrolled B<HList>
-class and inherits all the commands, options and subwidgets of its
-super-class.
-
+The B<Tree> class is derived from the B<HList> class and inherits all
+the commands, options and subwidgets of its super-class.  A B<Tree> is
+not scrolled by default.
 
 =head1 STANDARD OPTIONS
 
@@ -254,28 +255,36 @@ entries of the specified entry.
 
 =head1 DESCRIPTION
 
-The B<Tree> method creates a new window 
-and makes it into a Tree widget and return a reference to it.  Additional
-options, described above, may be specified on the command line or in
-the option database to configure aspects of the Tree widget such as its
-cursor and relief.
+The B<Tree> method creates a new window and makes it into a Tree widget
+and return a reference to it.  Additional options, described above, may
+be specified on the command line or in the option database to configure
+aspects of the Tree widget such as its cursor and relief.
+
 The Tree widget can be used to display hierachical data in a tree
 form. The user can adjust the view of the tree by opening or closing
 parts of the tree.
+
 To display a static tree structure, you can add the entries into the
-B<hlist> subwidget and hide any entries as desired. Then you can
-call the B<autosetmode> method. This will set up the Tree widget so
-that it handles all the I<open> and I<close> events
-automatically. (Please see the demonstration program
-F<examples/perl-tree>).
-The above method is not applicable if you want to maintain a dynamic
-tree structure, i.e, you do not know all the entries in the tree and
-you need to add or delete entries subsequently. To do this, you should
-first create the entries in the B<hlist> subwidget. Then, use the
-setmode method to indicate the entries that can be opened or closed,
-and use the B<-opencmd> and B<-closecmd> options to handle
-the opening and closing events. (Please see the demonstration program
-F<examples/perl-dyntree>).
+B<hlist> subwidget and hide any entries as desired. Then you can call
+the B<autosetmode> method. This will set up the Tree widget so that it
+handles all the I<open> and I<close> events automatically. (Please see
+the demonstration program F<examples/perl-tix-tree>).
+
+The above method is not applicable if you want to maintain a dynamic tree
+structure, i.e, you do not know all the entries in the tree and you need
+to add or delete entries subsequently. To do this, you should first create
+the entries in the B<hlist> subwidget. Then, use the setmode method to
+indicate the entries that can be opened or closed, and use the B<-opencmd>
+and B<-closecmd> options to handle the opening and closing events. (Please
+see the demonstration program F<examples/perl-tix-dyntree>).
+
+Use either
+
+    $w->Scrolled( "Tree", ... ) 
+or
+    $w->ScrlTree(  ... ) 
+
+to create a scrolled B<Tree>.
 
 
 =head1 WIDGET METHODS

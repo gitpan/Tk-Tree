@@ -11,6 +11,7 @@ Tk/minus.xbm
 Tk/minusarm.xpm
 Tk/plus.xbm
 Tk/plusarm.xpm
+examples/adjuster
 examples/perl-tix-dyntree
 examples/perl-tix-tree
 test.pl

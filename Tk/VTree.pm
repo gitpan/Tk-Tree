@@ -10,14 +10,14 @@
 package Tk::VTree;
 
 require 5.004;
+
+use Tk::Derived;
 use Tk::HList;
-use Tk::Frame;
-use Carp;
 
 use strict;
 use vars qw( @ISA $VERSION );
-@ISA = qw( Tk::Frame );
-$VERSION = '0.01';
+@ISA = qw( Tk::Derived Tk::HList );
+$VERSION = '0.02';
 
 BEGIN { 
     die "Patched version of HList.pm required" 
@@ -30,14 +30,7 @@ sub Populate {
     $args->{-indicatorcmd} ||= sub { $w->IndicatorCmd( @_ ) };
     $w->SUPER::Populate( $args );
         
-    my $hlist = $w->Scrolled( qw/HList -scrollbars osoe/ );
-    # my $hlist = $w->HList();
-    $hlist->pack( qw/-expand 1 -fill both/ );
-
-    $w->Advertise( hlist => $hlist );
-    $w->Delegates( DEFAULT => $hlist );
     $w->ConfigSpecs(
-        DEFAULT       => [ $hlist ],
         -ignoreinvoke => ["PASSIVE",  "ignoreInvoke", "IgnoreInvoke", 0],
         -opencmd      => ["CALLBACK", "openCmd",      "OpenCmd",
                           sub { $w->OpenCmd( @_ ) } ],

@@ -42,7 +42,7 @@ sub tixGetimage {
     }
 
     # Try built-in bitmaps
-    $Images{$name} = $w->Pixmap( "-id" => $name );
+    $Images{$name} = $w->Pixmap( -id => $name );
     return( $Images{$name} );
 }
 

@@ -1,5 +1,26 @@
 Revision history for Perl extension Tk::Tree.
 
+Version 0.05
+============
+
+Mon Jan 12 13:21:41 1998  Chris Dean  <ctdean@cogit.com>
+
+      * Tk/Tree.pm: Version 0.05
+
+      * Tk/VTree.pm: From Achim -- A VTree isa HList, it doesn't have
+        a component that is a Scrolled HList.
+
+      * Tk/Tree.pm: From Achim -- Since a Tree is not scrolled by
+        default add the Tk::Widget::ScrlTree method.
+
+      * README: Trees are not Scrolled by default.
+
+      * examples/adjuster: Another example
+
+      * examples/perl-tix-*tree: Use ScrlTree
+
+      * Tk/Tree.pm: Mention that Trees are not Scrolled in the docs.
+
 Version 0.04
 ============
 
