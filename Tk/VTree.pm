@@ -9,12 +9,19 @@
 
 package Tk::VTree;
 
+require 5.004;
+use Tk::HList;
+use Tk::Frame;
+use Carp;
+
+BEGIN { 
+    die "Patched version of HList.pm required" 
+        unless( $Tk::HList::VERSION =~ /ctd/ || $Tk::HList::VERSION > 2.013 );
+}
+
 use strict;
 use vars qw( @ISA );
 @ISA = qw( Tk::Frame );
-
-use Tk::HList;
-use Carp;
 
 sub Populate {
     my( $w, $args ) = @_;
@@ -23,6 +30,7 @@ sub Populate {
     $w->SUPER::Populate( $args );
         
     my $hlist = $w->Scrolled( qw/HList -scrollbars osoe/ );
+    # my $hlist = $w->HList();
     $hlist->pack( qw/-expand 1 -fill both/ );
 
     $w->Advertise( hlist => $hlist );

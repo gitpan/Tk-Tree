@@ -21,11 +21,11 @@ This release includes:
     HList.pm.patched    Already patched version of HList.pm 2.013
     images              Some images used by the widgets. 
 
-HList.pm
-========
+HList.patch
+===========
 This is a *required* patch for the HList.pm that comes with Tk402.003.
-It must be installed by hand.
+It is installed automatically.
 
 Enjoy,
 Chris Dean
-04 December 1997
+08 December 1997

@@ -8,7 +8,12 @@
 
 BEGIN { $| = 1; print "1..1\n"; }
 END {print "not ok 1\n" unless $loaded;}
+use Tk::HList;
 use Tk::Tree;
+BEGIN { 
+    die "Patched version of HList.pm required" 
+        unless( $Tk::HList::VERSION =~ /ctd/ || $Tk::HList::VERSION > 2.013 );
+}
 $loaded = 1;
 print "ok 1\n";
 

@@ -6,13 +6,15 @@
 #
 # Chris Dean <ctdean@cogit.com>
 
+use lib "..";
 use strict;
 use Tk;
 use Tk::Tree;
 
 my $top = new MainWindow( -title => "Tree" );
 
-my $tree = $top->Tree( -separator => "\\", -exportselection => 1 );
+# my $tree = $top->Scrolled( qw/Tree -separator \ -exportselection 1/ );
+my $tree = $top->Tree( qw/-separator \ -exportselection 1/ );
 $tree->pack( qw/-expand yes -fill both -padx 10 -pady 10 -side top/ );
 
 my @directories = qw( C: C:\Dos C:\Windows C:\Windows\System );
