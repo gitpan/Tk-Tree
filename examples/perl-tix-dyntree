@@ -40,7 +40,7 @@ sub dyntree_adddir {
     my $text = $dir;
     $text = (split( "/", $dir ))[-1] unless $text eq "/";
 
-    $tree->add( $dir, -text => $text, -image => $tree->tixGetimage("folder") );
+    $tree->add( $dir, -text => $text, -image => $tree->Getimage("folder") );
     $tree->setmode( $dir, -d $dir ? "open" : "none" );
 }
 
@@ -70,7 +70,7 @@ sub dyntree_opendir {
 	return;
     }
 
-    my $image = $tree->tixGetimage("folder");
+    my $image = $tree->Getimage("folder");
 
     opendir D, $dir or return;
     foreach my $file (sort readdir( D )) {

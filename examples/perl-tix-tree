@@ -22,13 +22,13 @@ my @directories = qw( C: C:\Dos C:\Windows C:\Windows\System );
 
 foreach my $d (@directories) {
     my $text = (split( /\\/, $d ))[-1]; 
-    $tree->add( $d, -text => $text, -image => $tree->tixGetimage("folder") );
+    $tree->add( $d, -text => $text, -image => $tree->Getimage("folder") );
 }
 
 $tree->configure( -command => sub { print "@_\n" } );
 
 # The tree is fully expanded by default.
-$tree->SetModes();
+$tree->autosetmode();
 
 my $ok = $top->Button( qw/-text Ok -underline 0 -width 6/,
                        -command => sub { exit } );

@@ -7,7 +7,7 @@ unlink "Tk/HList.pm";
 my $need;
 if( $Tk::HList::VERSION =~ /ctd/ ) {
     $need = "Installed HList.pm is based on the patched version from Tk-Tree.";
-} elsif( $Tk::HList::VERSION <= 2.013 ) {
+} elsif( $Tk::HList::VERSION <= 3.006 ) {
     $need = "Installed HList.pm is an older unpatched version.";
 } else {
     warn "Installed HList.pm is newer than patched version from Tk-Tree.\n";

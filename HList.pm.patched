@@ -1,14 +1,11 @@
 package Tk::HList; 
 
-# Patched version of HList.pm 2.013 to support Tree.pm.
-
-use vars qw($VERSION);
-$VERSION = '2.013ctd'; # $Id: //depot/Tk/HList/HList.pm#13$
+use vars qw($VERSION @ISA);
+$VERSION = '3.006001'; # $Id: //depot/Tk8/HList/HList.pm#6$
 
 use Tk qw(Ev);
-use Tk::TixWidget;
 
-@ISA = qw(Tk::Widget Tk::TixWidget);
+@ISA = qw(Tk::Widget);
 
 Construct Tk::Widget 'HList';
 sub Tk::Widget::ScrlHList { shift->Scrolled('HList'=>@_) }
@@ -133,8 +130,7 @@ sub Button1
  if (defined($info[1]) && $info[1] eq 'indicator')
   {
    $w->{tixindicator} = $ent;
-   $w->tixEventType( "<Arm>" );
-   $w->Callback(-indicatorcmd => $ent);
+   $w->Callback(-indicatorcmd => $ent, "<Arm>");
   }
  else
   {
@@ -241,8 +237,7 @@ sub ButtonRelease1
    my @info = $w->info('item',$Ev->x, $Ev->y);
    if(defined($info[1]) && $info[1] eq 'indicator')
     {
-     $w->tixEventType( "<Activate>" );
-     $w->Callback(-indicatorcmd => $ent);
+     $w->Callback(-indicatorcmd => $ent, "<Activate>");
     }
    return;
   }
@@ -296,8 +291,8 @@ sub Button1Motion
 
  if($w->{tixindicator})
   {
-   $w->tixEventType( $w->{tixindicator} eq $ent ? "<Arm>" : "<Disarm>" );
-   $w->Callback(-indicatorcmd => $w->{tixindicator});
+   my $event_type = $w->{tixindicator} eq $ent ? "<Arm>" : "<Disarm>";
+   $w->Callback(-indicatorcmd => $w->{tixindicator}, $event_type );
    return;
   }
 
@@ -532,6 +527,13 @@ sub LeftRight
 
    $w->Callback(-browsecmd =>$ent);
   }
+}   
+
+sub KeyboardHome
+{
+ my $w = shift;
+ $w->yview('moveto' => 0);
+ $w->xview('moveto' => 0);
 }
 
 sub KeyboardActivate

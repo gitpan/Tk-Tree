@@ -34,7 +34,7 @@ foreach my $d (@directories) {
     $list->add( $d, -text => $text );
 }
 
-$list->SetModes();
+$list->autosetmode();
 
 MainLoop;
 

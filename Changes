@@ -1,5 +1,21 @@
 Revision history for Perl extension Tk::Tree.
 
+Version 3.00401
+===============
+
+Fri Mar 20 11:45:54 1998  Chris Dean  <ctdean@cogit.com>
+
+      * Tk/DirTree.pm: Created.
+
+      * HList.pm.patched: Starting from HList.pm in Tk800.0_02, removed
+        references to EventType.  The -indicatorcmd callback takes the
+        EventType as an additional argument.
+
+      * Tk/Tree.pm: Starting from Tree.pm in Tk800.0_02, expect
+        -indicatorcmd to have an additional arg.
+
+      * examples/perl-tix-dirtree: Created.
+
 Version 0.05
 ============
 
