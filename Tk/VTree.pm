@@ -14,14 +14,15 @@ use Tk::HList;
 use Tk::Frame;
 use Carp;
 
+use strict;
+use vars qw( @ISA $VERSION );
+@ISA = qw( Tk::Frame );
+$VERSION = '0.01';
+
 BEGIN { 
     die "Patched version of HList.pm required" 
         unless( $Tk::HList::VERSION =~ /ctd/ || $Tk::HList::VERSION > 2.013 );
 }
-
-use strict;
-use vars qw( @ISA );
-@ISA = qw( Tk::Frame );
 
 sub Populate {
     my( $w, $args ) = @_;

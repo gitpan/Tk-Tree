@@ -12,7 +12,7 @@ use strict;
 use vars qw( @ISA $VERSION );
 @ISA = qw( Tk::VTree );
 
-$VERSION = "0.03";
+$VERSION = "0.04";
 
 Construct Tk::Widget 'Tree';
 

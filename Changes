@@ -1,5 +1,16 @@
 Revision history for Perl extension Tk::Tree.
 
+Version 0.04
+============
+
+Mon Dec  8 13:00:46 1997  Chris Dean  <ctdean@cogit.com>
+
+      * Tk/Tree.pm: Version 0.04
+
+      * Tk/VTree.pm: Added VERSION to VTree.pm to help out CPAN.pm.
+        Otherwise CPAN.pm's `r' command gets confused.  (From Achim
+        Bohnet <ach@mpe.mpg.de>)
+
 Version 0.03
 ============
 

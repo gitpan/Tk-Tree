@@ -4,7 +4,7 @@
 #
 # Chris Dean <ctdean@cogit.com>
 
-use lib "../Tk";
+use lib "..";
 
 use strict;
 use Tk;
