@@ -7,7 +7,7 @@ package Tk::Tree;
 # Changes: Renee Baecker <module@renee-baecker.de>
 
 use vars qw($VERSION);
-$VERSION = '3.1'; # $Id: //depot/Tk/Tixish/Tree.pm#4$
+$VERSION = '4.1'; # $Id: //depot/Tk/Tixish/Tree.pm#4$
 
 use Tk;
 use Tk::Derived;

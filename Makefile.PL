@@ -1,38 +1,15 @@
+use 5.006001;
 use ExtUtils::MakeMaker;
-
-# Check for my patched version of HList.
-use Tk::HList;
-
-unlink "Tk/HList.pm";
-my $need;
-if( $Tk::HList::VERSION =~ /ctd/ ) {
-    $need = "Installed HList.pm is based on the patched version from Tk-Tree.";
-} elsif( $Tk::HList::VERSION <= 3.006 ) {
-    $need = "Installed HList.pm is an older unpatched version.";
-} else {
-    warn "Installed HList.pm is newer than patched version from Tk-Tree.\n";
-    warn "Using the current installed version.\n";
-}
-
-if( $need ) {
-    warn "$need\n";
-    warn "Using local copy of HList.pm (will supersede installed HList.pm).\n";
-    use File::Copy;
-    print "HList.pm.patched -> Tk/HList.pm\n";
-    copy( "HList.pm.patched", "Tk/HList.pm" );
-}
-
-
-# Write the Makefile
+# See lib/ExtUtils/MakeMaker.pm for details of how to influence
+# the contents of the Makefile that is written.
 WriteMakefile(
-    'NAME'          => 'Tk-Tree',
-    'VERSION_FROM'  => 'Tk/Tree.pm', # finds $VERSION
-    'dist'          => {
-        COMPRESS        => 'gzip -9f',
-        SUFFIX          => '.gz', 
-        DIST_DEFAULT    => 'all tardist',
-    },
-    clean           => { FILES => "Tk/HList.pm" },
-    PMLIBDIRS       => ['Tk'],
-    PREREQ_PM       => { Tk => 402.002 },
+    NAME              => 'Tk::Tree',
+    VERSION_FROM      => 'lib/Tk/Tree.pm', # finds $VERSION
+    PREREQ_PM         => {
+                           Tk => 800.024,
+                           Tk::HList => 4.014,
+                         }, # e.g., Module::Name => 1.1
+    ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
+      (ABSTRACT_FROM  => 'lib/Tk/Tree.pm', # retrieve abstract from module
+       AUTHOR         => 'Chris Dean') : ()),
 );
