@@ -4,9 +4,10 @@ package Tk::Tree;
 # Derived from Tree.tcl in Tix 4.1
 #
 # Chris Dean <ctdean@cogit.com>
+# Changes: Renee Baecker <module@renee-baecker.de>
 
 use vars qw($VERSION);
-$VERSION = '3.00401'; # $Id: //depot/Tk/Tixish/Tree.pm#4$
+$VERSION = '3.1'; # $Id: //depot/Tk/Tixish/Tree.pm#4$
 
 use Tk;
 use Tk::Derived;
@@ -17,21 +18,19 @@ use strict;
 Construct Tk::Widget 'Tree';
 
 sub Tk::Widget::ScrlTree { shift->Scrolled('Tree' => @_) }
+sub Populate{
+  my( $w, $args ) = @_;
 
-sub Populate 
-{
- my( $w, $args ) = @_;
+  $w->SUPER::Populate( $args );
 
- $w->SUPER::Populate( $args );
-
- $w->ConfigSpecs(
+  $w->ConfigSpecs(
         -ignoreinvoke => ["PASSIVE",  "ignoreInvoke", "IgnoreInvoke", 0],
         -opencmd      => ["CALLBACK", "openCmd",      "OpenCmd",
                           sub { $w->OpenCmd( @_ ) } ],
         -indicatorcmd => ["CALLBACK", "indicatorCmd",      "IndicatorCmd",
                           sub { $w->IndicatorCmd( @_ ) } ],
         -closecmd     => ["CALLBACK", "closeCmd",     "CloseCmd",
-                          sub { $w->CloseCmd( @_ ) } ], 
+                          sub { $w->CloseCmd( @_ ) } ],
         -indicator    => ["SELF", "indicator", "Indicator", 1],
         -indent       => ["SELF", "indent", "Indent", 20],
         -width        => ["SELF", "width", "Width", 20],
@@ -39,178 +38,181 @@ sub Populate
        );
 }
 
-sub autosetmode 
-{
- my( $w ) = @_;
- $w->setmode();
+sub autosetmode{
+  my( $w ) = @_;
+  $w->setmode();
 }
 
-sub IndicatorCmd 
-{
- my( $w, $ent, $event ) = @_;
- 
- my $mode = $w->getmode( $ent );
- 
- if ( $event eq "<Arm>" ) 
-  {
-   if ($mode eq "open" ) 
-    {
-     $w->_indicator_image( $ent, "plusarm" );
-    } 
-   else 
-    {
-     $w->_indicator_image( $ent, "minusarm" );
+
+sub add_pathimage{
+  my ($w,$path,$imgopen,$imgclose) = @_;
+  $imgopen  ||= "minusarm";
+  $imgclose ||= "plusarm";
+  
+  my $separator = $w->cget(-separator);
+  
+  $path =~ s/([\.?()|])/\\$1/g;
+  $path =~ s/\$/\\\$/g;
+  $path =~ s/\\\$$/\$/;
+  $path =~ s/\*/[^$separator]+/g;
+  
+  push(@{$w->{Images}},[$path,$imgopen,$imgclose]);
+}
+
+sub IndicatorCmd{
+  my( $w, $ent, $event ) = @_;
+
+  my $mode = $w->getmode( $ent );
+
+  if ( $event eq "<Arm>" ){
+    if ($mode eq "open" ){
+     $w->_open($ent);
     }
-  } 
- elsif ( $event eq "<Disarm>" ) 
-  {
-   if ($mode eq "open" ) 
-    {
-     $w->_indicator_image( $ent, "plus" );
-    } 
-   else 
-    {
-     $w->_indicator_image( $ent, "minus" );
+    else{
+      $w->_close($ent);
     }
-  } 
- elsif( $event eq "<Activate>" ) 
-  {
+  }
+  elsif ( $event eq "<Disarm>" ){
+    if ($mode eq "open" ){
+     $w->_open($ent);
+    }
+    else{
+      $w->_close($ent);
+    }
+  }
+  elsif( $event eq "<Activate>" ){
    $w->Activate( $ent, $mode );
    $w->Callback( -browsecmd => $ent );
   }
 }
 
-sub close 
-{
- my( $w, $ent ) = @_;
- my $mode = $w->getmode( $ent );
- $w->Activate( $ent, $mode ) if( $mode eq "close" );
+sub close{
+  my( $w, $ent ) = @_;
+  my $mode = $w->getmode( $ent );
+  $w->Activate( $ent, $mode ) if( $mode eq "close" );
 }
 
-sub open 
-{
- my( $w, $ent ) = @_;
- my $mode = $w->getmode( $ent );
- $w->Activate( $ent, $mode ) if( $mode eq "open" );
+sub open{
+  my( $w, $ent ) = @_;
+  my $mode = $w->getmode( $ent );
+  $w->Activate( $ent, $mode ) if( $mode eq "open" );
 }
 
-sub getmode
-{
- my( $w, $ent ) = @_;
+sub getmode{
+  my( $w, $ent ) = @_;
 
- return( "none" ) unless $w->indicatorExists( $ent );
+  return( "none" ) unless $w->indicatorExists( $ent );
 
- my $img = $w->_indicator_image( $ent );
- return( "open" ) if( $img eq "plus" || $img eq "plusarm" );
- return( "close" );
+  my $img = $w->_indicator_image( $ent );
+  if($img eq "plus" || $img eq "plusarm" || grep{$img eq $_->[2]}@{$w->{Images}}){
+    return( "open" );
+  }
+  return( "close" );
 }
 
-sub setmode
-{
- my ($w,$ent,$mode) = @_;
- unless (defined $mode)
-  {
-   $mode = "none";                     
-   my @args;                             
-   push(@args,$ent) if defined $ent;
-   my @children = $w->infoChildren( @args );
-   if ( @children ) 
-    {
-     $mode = "close";
-     foreach my $c (@children) 
-      {
-       $mode = "open" if $w->infoHidden( $c );
-       $w->setmode( $c );
+sub setmode{
+  my ($w,$ent,$mode) = @_;
+  unless (defined $mode){
+    $mode = "none";
+    my @args;
+    push(@args,$ent) if defined $ent;
+    my @children = $w->infoChildren( @args );
+    if ( @children ){
+      $mode = "close";
+      foreach my $c (@children){
+        $mode = "open" if $w->infoHidden( $c );
+        $w->setmode( $c );
       }
     }
   }
-            
- if (defined $ent) 
-  {      
-   if ( $mode eq "open" )
-    {
-     $w->_indicator_image( $ent, "plus" );
+
+  if (defined $ent){
+    if ( $mode eq "open" ){
+      $w->_open($ent);
     }
-   elsif ( $mode eq "close" )
-    {
-     $w->_indicator_image( $ent, "minus" );
+    elsif ( $mode eq "close" ){
+      $w->_close($ent);
     }
-   elsif( $mode eq "none" )
-    {
-     $w->_indicator_image( $ent, undef );
+    elsif( $mode eq "none" ){
+      $w->_indicator_image( $ent, undef );
     }
   }
 }
 
-sub Activate 
-{
- my( $w, $ent, $mode ) = @_;
- if ( $mode eq "open" ) 
-  {
-   $w->Callback( -opencmd => $ent );
-   $w->_indicator_image( $ent, "minus" );
-  } 
- elsif ( $mode eq "close" ) 
-  {
-   $w->Callback( -closecmd => $ent );
-   $w->_indicator_image( $ent, "plus" );
-  }
- else
-  {
-
-  }
-}
-
-sub OpenCmd 
-{
- my( $w, $ent ) = @_;
- # The default action
- foreach my $kid ($w->infoChildren( $ent )) 
-  {
-   $w->show( -entry => $kid );
-  }
-}
-
-sub CloseCmd 
-{
- my( $w, $ent ) = @_;
-
- # The default action
- foreach my $kid ($w->infoChildren( $ent )) 
-  {
-   $w->hide( -entry => $kid );
-  }
-}
-
-sub Command 
-{
- my( $w, $ent ) = @_;
-
- return if $w->{Configure}{-ignoreInvoke};
-
- $w->Activate( $ent, $w->getmode( $ent ) ) if $w->indicatorExists( $ent );
-}
-
-sub _indicator_image 
-{
- my( $w, $ent, $image ) = @_;
- my $data = $w->privateData();
- if (@_ > 2)
-  {
-   if (defined $image)
-    {
-     $w->indicatorCreate( $ent, -itemtype => 'image' )
-         unless $w->indicatorExists($ent);
-     $data->{$ent} = $image;
-     $w->indicatorConfigure( $ent, -image => $w->Getimage( $image ) );
-    }
-   else
-    {
-     $w->indicatorDelete( $ent ) if $w->indicatorExists( $ent );
-     delete $data->{$ent};
+sub _open{
+  my ($w,$ent) = @_;
+  $w->_indicator_image( $ent, "plus" );
+  for my $entry (@{$w->{Images}}){
+    if($ent =~ $entry->[0]){
+      $w->_indicator_image( $ent, $entry->[2] );
     }
   }
- return $data->{$ent};
+}# _folder
+
+sub _close{
+  my ($w,$ent) = @_;
+  $w->_indicator_image( $ent, "minus" );
+  for my $entry (@{$w->{Images}}){
+    if($ent =~ $entry->[0]){
+      $w->_indicator_image( $ent, $entry->[1] );
+    }
+  }
+}# _openfolder
+
+sub Activate{
+  my( $w, $ent, $mode ) = @_;
+  if ( $mode eq "open" ){
+    $w->Callback( -opencmd => $ent );
+    $w->_close($ent);
+  }
+  elsif ( $mode eq "close" ){
+    $w->Callback( -closecmd => $ent );
+    $w->_open($ent);
+  }
+  else{
+  }
+}
+
+sub OpenCmd{
+  my( $w, $ent ) = @_;
+  # The default action
+  foreach my $kid ($w->infoChildren( $ent )){
+    $w->show( -entry => $kid );
+  }
+}
+
+sub CloseCmd{
+  my( $w, $ent ) = @_;
+  # The default action
+  foreach my $kid ($w->infoChildren( $ent )){
+    $w->hide( -entry => $kid );
+  }
+}
+
+sub Command{
+  my( $w, $ent ) = @_;
+
+  return if $w->{Configure}{-ignoreInvoke};
+
+  $w->Activate( $ent, $w->getmode( $ent ) ) if $w->indicatorExists( $ent );
+}
+
+sub _indicator_image{
+  my( $w, $ent, $image ) = @_;
+  my $data = $w->privateData();
+  if (@_ > 2){
+    if (defined $image){
+      $w->indicatorCreate( $ent, -itemtype => 'image' )
+        unless $w->indicatorExists($ent);
+      $data->{$ent} = $image;
+      $w->indicatorConfigure( $ent, -image => $w->Getimage( $image ) );
+    }
+    else{
+      $w->indicatorDelete( $ent ) if $w->indicatorExists( $ent );
+      delete $data->{$ent};
+    }
+  }
+  return $data->{$ent};
 }
 
 1;
@@ -218,13 +220,13 @@ sub _indicator_image
 __END__
 
 #  Copyright (c) 1996, Expert Interface Technologies
-#  See the file "license.terms" for information on usage and redistribution
-#  of this file, and for a DISCLAIMER OF ALL WARRANTIES.
+#  See the openfolder "license.terms" for information on usage and redistribution
+#  of this openfolder, and for a DISCLAIMER OF ALL WARRANTIES.
 #
-#  The file man.macros and some of the macros used by this file are
+#  The openfolder man.macros and some of the macros used by this openfolder are
 #  copyrighted: (c) 1990 The Regents of the University of California.
 #               (c) 1994-1995 Sun Microsystems, Inc.
-#  The license terms of the Tcl/Tk distrobution are in the file
+#  The license terms of the Tcl/Tk distrobution are in the openfolder
 #  license.tcl.
 
 =head1 NAME
@@ -430,6 +432,32 @@ the entry has hidden children and this entry can be opened by the
 user. The B<close> mode indicates that all the children of the entry
 are now visible and the entry can be closed by the user.
 
+=item I<$widget-E<gt>>B<add_pathimage>(I<TreeRegExp [, OpenImg, CloseImg]>)
+
+This command defines images for a given path (images must be in xpm-format). 
+The path can be determined by a simplified RegEx.
+There are just three metasymbols:
+
+^ at the beginning of the C<TreeRegExp> same as in Perl RegExp
+* anything
+$ at the end of the C<TreeRegExp>, the same as in Perl RegExp
+
+Examples:
+  
+  $tree->add_pathimage('^root','openfolder','folder');
+  
+matches C<root>, C<root.foo>, C<root.bar>, but not C<foo.root>
+
+  $tree->add_pathimage('root.*.class','openfolder','folder');
+  
+matches all paths containing C<<root.<anything>.class>>, but not C<<root.<anything>.<anything>.class>>
+C<*> is one part of the path. If you want to use a wildcard for two steps, you
+have to use C<*.*>.
+
+  $tree->add_pathimage('class$','openfolder','folder');
+  
+This matches all path with C<class> at the end.
+
 =back
 
 =head1 BINDINGS
@@ -461,6 +489,7 @@ Tk::HList, Tix(n)
 
 Perl/TK version by Chris Dean <ctdean@cogit.com>.  Original Tcl/Tix
 version by Ioi Kim Lam.
+Co-maintained by Renee Baecker <module@renee-baecker.de>
 
 =head1 ACKNOWLEDGEMENTS
 

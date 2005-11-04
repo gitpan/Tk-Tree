@@ -1,5 +1,12 @@
 Revision history for Perl extension Tk::Tree.
 
+Version 3.1
+===========
+
+Fri Nov 04 10:59:23 2005 Renee Baecker <module@renee-baecker.de>
+
+      * Tk/Tree.pm: add_pathimage added and code of module changed
+
 Version 3.00401
 ===============
 
