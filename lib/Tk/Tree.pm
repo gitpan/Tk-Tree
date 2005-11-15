@@ -7,13 +7,14 @@ package Tk::Tree;
 # Changes: Renee Baecker <module@renee-baecker.de>
 
 use vars qw($VERSION);
-$VERSION = '4.1'; # $Id: //depot/Tk/Tixish/Tree.pm#4$
+$VERSION = '4.2'; # $Id: //depot/Tk/Tixish/Tree.pm#4$
 
 use Tk;
 use Tk::Derived;
 use Tk::HList;
 @ISA = qw(Tk::Derived Tk::HList);
 use strict;
+use warnings;
 
 Construct Tk::Widget 'Tree';
 
@@ -57,6 +58,34 @@ sub add_pathimage{
   $path =~ s/\*/[^$separator]+/g;
   
   push(@{$w->{Images}},[$path,$imgopen,$imgclose]);
+}
+
+sub child_entries{
+  my ($w,$path,$depth) = @_;
+  
+  my $level =  1;
+  $depth  ||=  1;
+  $path   ||= '';
+  
+  my @children = $w->_get_childinfos($depth,$level,$path);
+  
+  return wantarray ? @children : scalar(@children);
+}
+
+sub _get_childinfos{
+  my ($w,$maxdepth,$level,$path) = @_;
+  my @children = $w->infoChildren($path);
+  my @tmp;
+  
+  if($level < $maxdepth){
+    for my $child(@children){
+      push(@tmp,$w->_get_childinfos($maxdepth,$level +1,$child));
+    }
+  }
+  
+  push(@children,@tmp);
+  
+  return @children;
 }
 
 sub IndicatorCmd{
@@ -457,6 +486,28 @@ have to use C<*.*>.
   $tree->add_pathimage('class$','openfolder','folder');
   
 This matches all path with C<class> at the end.
+
+=item I<$widget-E<gt>>B<child_entries>([$path][,$depth])
+
+This command returns in list context an array that contains all pathnames of
+subentries within the given path. In scalar context it returns the number of
+subentries in the given path.
+
+  Example:
+    root
+     | foo
+     | bar
+     |  | bar1
+     |  | bar2
+
+  my @childentries = $tree->child_entries('root.bar');
+  # returns (root.bar.bar1, root.bar.bar2)
+  
+  my $nr_of_subentries = $tree->child_entries('root',2);
+  # returns 4
+  
+If C<$path> is omitted, all it is assumed, that the entrie above 'root' is meant.
+C<$depth> defines the numbers of levels.
 
 =back
 
