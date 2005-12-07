@@ -2,7 +2,7 @@ Changes
 MANIFEST
 Makefile.PL
 README
-Tk/Tree.pm
+lib/Tk/Tree.pm
 lib/Tk/minus.xbm
 lib/Tk/minusarm.xpm
 lib/Tk/plus.xbm
