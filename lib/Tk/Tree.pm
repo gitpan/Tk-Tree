@@ -7,12 +7,12 @@ package Tk::Tree;
 # Changes: Renee Baecker <module@renee-baecker.de>
 
 use vars qw($VERSION);
-$VERSION = '4.2'; # $Id: //depot/Tk/Tixish/Tree.pm#4$
+$VERSION = '4.4'; # $Id: //depot/Tk/Tixish/Tree.pm#4$
 
 use Tk;
 use Tk::Derived;
 use Tk::HList;
-@ISA = qw(Tk::Derived Tk::HList);
+use base qw(Tk::Widget Tk::Derived Tk::HList);
 use strict;
 use warnings;
 

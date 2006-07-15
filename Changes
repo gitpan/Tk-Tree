@@ -8,6 +8,8 @@ x.1  Fri Nov 04 10:59:23 2005 Renee Baecker <module@renee-baecker.de>
       
 x.2  Tue Nov 15 05:24:52 2005 Renee Baecker <module@renee-baecker.de>
       * Tk/Tree.pm: child_entries implemented
+      
+x.3/x.4 Minor bugfixes
 
 
 

@@ -7,4 +7,6 @@ lib/Tk/minus.xbm
 lib/Tk/minusarm.xpm
 lib/Tk/plus.xbm
 lib/Tk/plusarm.xpm
+lib/Tk/DirTree.pm
 lib/examples/perl-tix-tree
+META.yml                                 Module meta-data (added by MakeMaker)
