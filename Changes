@@ -11,6 +11,10 @@ x.2  Tue Nov 15 05:24:52 2005 Renee Baecker <module@renee-baecker.de>
       
 x.3/x.4 Minor bugfixes
 
+x.5  Mon Oct 02 11:07:14 2006 Renee Baecker <module@renee-baecker.de>
+      * added pseudo documentation for some methods
+      * added tests: Pod, Pod_Coverage, Manifest
+
 
 
 

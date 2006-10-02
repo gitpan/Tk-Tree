@@ -7,7 +7,7 @@ package Tk::Tree;
 # Changes: Renee Baecker <module@renee-baecker.de>
 
 use vars qw($VERSION);
-$VERSION = '4.4'; # $Id: //depot/Tk/Tixish/Tree.pm#4$
+$VERSION = '4.5'; # $Id: //depot/Tk/Tixish/Tree.pm#4$
 
 use Tk;
 use Tk::Derived;
@@ -505,9 +505,15 @@ subentries in the given path.
   
   my $nr_of_subentries = $tree->child_entries('root',2);
   # returns 4
-  
+
 If C<$path> is omitted, all it is assumed, that the entrie above 'root' is meant.
 C<$depth> defines the numbers of levels.
+
+=item Activate
+
+=item IndicatorCmd
+
+=item Populate
 
 =back
 
