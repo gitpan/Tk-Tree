@@ -15,7 +15,8 @@ x.5  Mon Oct 02 11:07:14 2006 Renee Baecker <module@renee-baecker.de>
       * added pseudo documentation for some methods
       * added tests: Pod, Pod_Coverage, Manifest
 
-
+x.6  Mon Dec 18 10:47:24 2006 Renee Baecker <module@renee-baecker.de>
+      * fixed some bugs in Tests
 
 
 

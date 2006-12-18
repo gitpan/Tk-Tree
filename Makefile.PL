@@ -7,7 +7,7 @@ WriteMakefile(
     VERSION_FROM      => 'lib/Tk/Tree.pm', # finds $VERSION
     PREREQ_PM         => {
                            Tk        => 800.024,
-                           Tk::HList => 4.014,
+                           Tk::HList => 3.040,
                          }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Tk/Tree.pm', # retrieve abstract from module
