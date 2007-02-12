@@ -18,6 +18,9 @@ x.5  Mon Oct 02 11:07:14 2006 Renee Baecker <module@renee-baecker.de>
 x.6  Mon Dec 18 10:47:24 2006 Renee Baecker <module@renee-baecker.de>
       * fixed some bugs in Tests
 
+x.7  Wed Feb 07 15:47:24 2007 Renee Baecker <module@renee-baecker.de>
+      * fixed the Tk::Widget-Bug, thanks to Slaven Rezic
+
 
 
 Version 3.00401
