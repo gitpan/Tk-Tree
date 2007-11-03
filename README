@@ -15,16 +15,6 @@ This release includes:
     Tree.pm             The Tree class.
     DirTree.pm          The DirTree class.
     perl-tix-tree       Perl version of Tix4.1.0/demos/samples/Tree.tcl
-    perl-tix-dyntree    Perl version of Tix4.1.0/demos/samples/DynTree.tcl
-    perl-tix-dirtree    Perl version of Tix4.1.0/demos/samples/DirTree.tcl
-    adjuster            An example with an adjustable window.
-    HList.patch         Required patch for HList.pm
-    HList.pm.patched    Already patched version of HList.pm 2.013
-
-HList.patch
-===========
-This is a patch for the HList.pm. It is installed automatically if
-needed.
 
 Enjoy,
 Chris Dean

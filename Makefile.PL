@@ -10,6 +10,6 @@ WriteMakefile(
                            Tk::HList => 3.040,
                          }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM  => 'lib/Tk/Tree.pm', # retrieve abstract from module
-       AUTHOR         => 'Chris Dean, Renee Baecker') : ()),
+      (ABSTRACT_FROM  => 'lib/Tk/Tree.pod', # retrieve abstract from module
+       AUTHOR         => 'Chris Dean, Renee Baecker, Slaven Rezic') : ()),
 );

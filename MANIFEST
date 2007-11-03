@@ -2,16 +2,15 @@ Changes
 MANIFEST
 Makefile.PL
 README
+examples/perl-tix-tree
 t/Tk-Tree.t
 t/Tree_Pod.t
-t/Tree_Pod_Coverage.t
 t/Tree_Manifest.t
 lib/Tk/Tree.pm
+lib/Tk/Tree.pod
 lib/Tk/minus.xbm
 lib/Tk/minusarm.xpm
 lib/Tk/plus.xbm
 lib/Tk/plusarm.xpm
 lib/Tk/DirTree.pm
 lib/Tk/DirTree.pod
-lib/examples/perl-tix-tree
-META.yml                                 Module meta-data (added by MakeMaker)

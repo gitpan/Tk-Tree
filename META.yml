@@ -1,14 +1,15 @@
 --- #YAML:1.0
 name:                Tk-Tree
-version:             4.7
+version:             4.71
 abstract:            Create and manipulate Tree widgets
-license:             unknown
-generated_by:        ExtUtils::MakeMaker version 6.30_02
-author:              Chris Dean, Renee Baecker
+license:             ~
+generated_by:        ExtUtils::MakeMaker version 6.36
 distribution_type:   module
 requires:     
     Tk:                            800.024
     Tk::HList:                     3.04
 meta-spec:
-    url: <http://module-build.sourceforge.net/META-spec-new.html>;
-    version: 1.1
+    url:     http://module-build.sourceforge.net/META-spec-v1.2.html
+    version: 1.2
+author:
+    - Chris Dean, Renee Baecker, Slaven Rezic

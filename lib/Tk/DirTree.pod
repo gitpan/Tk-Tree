@@ -127,7 +127,7 @@ Change the current directory to I<dir>.
 
 =head1 OTHER METHODS
 
-These methods have to be documented
+These methods have to be documented or made private:
 
 =over 4
 

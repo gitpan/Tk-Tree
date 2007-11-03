@@ -21,7 +21,19 @@ x.6  Mon Dec 18 10:47:24 2006 Renee Baecker <module@renee-baecker.de>
 x.7  Wed Feb 07 15:47:24 2007 Renee Baecker <module@renee-baecker.de>
       * fixed the Tk::Widget-Bug, thanks to Slaven Rezic
 
-
+x.71
+      * synchronized with version found in Tk SVN repository:
+        * Pod found in Tree.pm split into own file
+        * restored original indentation (NI-S style) and
+          line endings (Unix) 
+        * fixed Tk::Widget bug also in Tk::DirTree
+        * removed Pod::Coverage test, because it does not fit into
+          classic Tk modules (e.g. Populate never needs to be
+          documented in a Tk system)
+        * Tree.pod now follows the Tk version, which seems to
+          be more modern
+        * moved examples directory one up, to prevent from installing
+          into the site directory
 
 Version 3.00401
 ===============
