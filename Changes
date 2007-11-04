@@ -1,27 +1,10 @@
 Revision history for Perl extension Tk::Tree.
 
-Major Version 4
-=================
+4.72  2007-11-04 Slaven Rezic <srezic@cpan.org>
+      * restored 5.005 compatibility
+      * reordered this file
 
-x.1  Fri Nov 04 10:59:23 2005 Renee Baecker <module@renee-baecker.de>
-      * Tk/Tree.pm: add_pathimage added and code of module changed
-      
-x.2  Tue Nov 15 05:24:52 2005 Renee Baecker <module@renee-baecker.de>
-      * Tk/Tree.pm: child_entries implemented
-      
-x.3/x.4 Minor bugfixes
-
-x.5  Mon Oct 02 11:07:14 2006 Renee Baecker <module@renee-baecker.de>
-      * added pseudo documentation for some methods
-      * added tests: Pod, Pod_Coverage, Manifest
-
-x.6  Mon Dec 18 10:47:24 2006 Renee Baecker <module@renee-baecker.de>
-      * fixed some bugs in Tests
-
-x.7  Wed Feb 07 15:47:24 2007 Renee Baecker <module@renee-baecker.de>
-      * fixed the Tk::Widget-Bug, thanks to Slaven Rezic
-
-x.71
+4.71  2007-11-03 Slaven Rezic <srezic@cpan.org>
       * synchronized with version found in Tk SVN repository:
         * Pod found in Tree.pm split into own file
         * restored original indentation (NI-S style) and
@@ -35,10 +18,29 @@ x.71
         * moved examples directory one up, to prevent from installing
           into the site directory
 
-Version 3.00401
-===============
+4.7  Wed Feb 07 15:47:24 2007 Renee Baecker <module@renee-baecker.de>
+      * fixed the Tk::Widget-Bug, thanks to Slaven Rezic
 
-Fri Mar 20 11:45:54 1998  Chris Dean  <ctdean@cogit.com>
+4.6  Mon Dec 18 10:47:24 2006 Renee Baecker <module@renee-baecker.de>
+      * fixed some bugs in Tests
+
+4.5  Mon Oct 02 11:07:14 2006 Renee Baecker <module@renee-baecker.de>
+      * added pseudo documentation for some methods
+      * added tests: Pod, Pod_Coverage, Manifest
+
+4.4
+      * Minor bugfixes
+
+4.3
+      * Minor bugfixes
+
+4.2  Tue Nov 15 05:24:52 2005 Renee Baecker <module@renee-baecker.de>
+      * Tk/Tree.pm: child_entries implemented
+      
+4.1  Fri Nov 04 10:59:23 2005 Renee Baecker <module@renee-baecker.de>
+      * Tk/Tree.pm: add_pathimage added and code of module changed
+      
+3.00401  Fri Mar 20 11:45:54 1998  Chris Dean  <ctdean@cogit.com>
 
       * Tk/DirTree.pm: Created.
 
@@ -51,10 +53,7 @@ Fri Mar 20 11:45:54 1998  Chris Dean  <ctdean@cogit.com>
 
       * examples/perl-tix-dirtree: Created.
 
-Version 0.05
-============
-
-Mon Jan 12 13:21:41 1998  Chris Dean  <ctdean@cogit.com>
+0.05  Mon Jan 12 13:21:41 1998  Chris Dean  <ctdean@cogit.com>
 
       * Tk/Tree.pm: Version 0.05
 
@@ -72,10 +71,7 @@ Mon Jan 12 13:21:41 1998  Chris Dean  <ctdean@cogit.com>
 
       * Tk/Tree.pm: Mention that Trees are not Scrolled in the docs.
 
-Version 0.04
-============
-
-Mon Dec  8 13:00:46 1997  Chris Dean  <ctdean@cogit.com>
+0.04  Mon Dec  8 13:00:46 1997  Chris Dean  <ctdean@cogit.com>
 
       * Tk/Tree.pm: Version 0.04
 
@@ -83,10 +79,7 @@ Mon Dec  8 13:00:46 1997  Chris Dean  <ctdean@cogit.com>
         Otherwise CPAN.pm's `r' command gets confused.  (From Achim
         Bohnet <ach@mpe.mpg.de>)
 
-Version 0.03
-============
-
-Mon Dec  8 09:26:32 1997  Chris Dean  <ctdean@cogit.com>
+0.03  Mon Dec  8 09:26:32 1997  Chris Dean  <ctdean@cogit.com>
 
       * Tk/Tree.pm: Version 0.03
 
@@ -99,7 +92,7 @@ Mon Dec  8 09:26:32 1997  Chris Dean  <ctdean@cogit.com>
 
       * Makefile.PL: Use new HList.pm if needed.
 
-Fri Dec  5 10:46:19 1997  Chris Dean  <ctdean@cogit.com>
+      Fri Dec  5 10:46:19 1997  Chris Dean  <ctdean@cogit.com>
 
       * MANIFEST: Removed folder.xpm (already in Tk402.003), and Tree.n
         (the pod info supersede it).
@@ -110,14 +103,8 @@ Fri Dec  5 10:46:19 1997  Chris Dean  <ctdean@cogit.com>
         from Achim Bohnet <ach@mpe.mpg.de>.
 
 
-Version 0.02
-============
-
-0.02 Thu Dec  4 17:51:01 PST 1997
+0.02  Thu Dec  4 17:51:01 PST 1997
         - Fixed package name in Makefile.PL.
-
-Version 0.01
-============
 
 0.01  Thu Dec  4 14:32:54 1997
 	- original version; created by h2xs 1.18

@@ -3,6 +3,7 @@ MANIFEST
 Makefile.PL
 README
 examples/perl-tix-tree
+t/dirtree.t
 t/Tk-Tree.t
 t/Tree_Pod.t
 t/Tree_Manifest.t

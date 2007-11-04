@@ -7,14 +7,13 @@ package Tk::Tree;
 # Changes: Renee Baecker <module@renee-baecker.de>
 
 use vars qw($VERSION);
-$VERSION = '4.71'; # $Id: Tree.pm,v 1.2 2007/11/03 21:13:11 eserte Exp $
+$VERSION = '4.72'; # $Id: Tree.pm,v 1.4 2007/11/04 09:11:31 eserte Exp $
 
 use Tk ();
 use Tk::Derived;
 use Tk::HList;
 use base  qw(Tk::Derived Tk::HList);
 use strict;
-use warnings;
 
 Construct Tk::Widget 'Tree';
 
