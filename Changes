@@ -1,5 +1,12 @@
 Revision history for Perl extension Tk::Tree.
 
+4.73  2007-11-08 Slaven Rezic <srezic@cpan.org>
+      * synchronized with version found in Tk SVN repository
+        * solved problems with Tk::DirTree under Windows
+        * minor test fixes
+      * internal change: Makefile.PL has a rule for detecting diffs
+        between Tk-Tree and Tk
+
 4.72  2007-11-04 Slaven Rezic <srezic@cpan.org>
       * restored 5.005 compatibility
       * reordered this file

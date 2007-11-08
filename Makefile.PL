@@ -3,7 +3,7 @@ use ExtUtils::MakeMaker;
 # the contents of the Makefile that is written.
 WriteMakefile(
     NAME              => 'Tk::Tree',
-    VERSION_FROM      => 'lib/Tk/Tree.pm', # finds $VERSION
+    VERSION           => '4.73',
     PREREQ_PM         => {
                            Tk        => 800.024,
                            Tk::HList => 3.040,
@@ -12,3 +12,34 @@ WriteMakefile(
       (ABSTRACT_FROM  => 'lib/Tk/Tree.pod', # retrieve abstract from module
        AUTHOR         => 'Chris Dean, Renee Baecker, Slaven Rezic') : ()),
 );
+
+sub MY::postamble {
+    my $postamble = <<'EOF';
+
+#TKWC=$(HOME)/work/Tk/trunk
+TKWC=$(HOME)/work/svk-checkouts/Tk-amd64
+MYDIFF=diff -up
+
+diff-tk:
+	@$(MYDIFF) t/dirtree.t         $(TKWC)/t/
+	@$(MYDIFF) lib/Tk/Tree.pm      $(TKWC)/Tixish/
+	@$(MYDIFF) lib/Tk/Tree.pod     $(TKWC)/pod/
+	@$(MYDIFF) lib/Tk/DirTree.pm   $(TKWC)/Tixish/
+	@$(MYDIFF) lib/Tk/DirTree.pod  $(TKWC)/pod/
+
+pre-dist:
+	cpan_check_versions
+
+EOF
+
+    if (defined $ENV{USER} && $ENV{USER} eq 'eserte' && $^O =~ /bsd/i && -f "../../perl.release.mk") {
+	$postamble .= <<'EOF';
+
+.include "../../perl.release.mk"
+.include "../../perl.cvs.mk"
+
+EOF
+    }
+
+    $postamble;
+}
