@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Tk-Tree
-version:             4.73
+version:             4.74
 abstract:            Create and manipulate Tree widgets
 license:             ~
 generated_by:        ExtUtils::MakeMaker version 6.36

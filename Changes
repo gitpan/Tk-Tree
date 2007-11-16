@@ -1,5 +1,10 @@
 Revision history for Perl extension Tk::Tree.
 
+4.74  2007-11-16 Slaven Rezic <srezic@cpan.org>
+      * (hopefully) fixed DirTree problem on Windows, spotted by
+        Martin Thurn (http://rt.cpan.org/Ticket/Display.html?id=30781)
+      * a couple of more tests for DirTree
+
 4.73  2007-11-08 Slaven Rezic <srezic@cpan.org>
       * synchronized with version found in Tk SVN repository
         * solved problems with Tk::DirTree under Windows

@@ -3,7 +3,7 @@ use ExtUtils::MakeMaker;
 # the contents of the Makefile that is written.
 WriteMakefile(
     NAME              => 'Tk::Tree',
-    VERSION           => '4.73',
+    VERSION           => '4.74',
     PREREQ_PM         => {
                            Tk        => 800.024,
                            Tk::HList => 3.040,
