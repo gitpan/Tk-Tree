@@ -1,5 +1,12 @@
 Revision history for Perl extension Tk::Tree.
 
+4.75  2007-11-17 Slaven Rezic <srezic@cpan.org>
+      * DirTree
+        * locale-specific sorting
+        * convert utf8 characters back to something perl's filesystem
+          functions understand
+      * removed t/Tree_Manifest.t -- make distcheck should be enough
+
 4.74  2007-11-16 Slaven Rezic <srezic@cpan.org>
       * (hopefully) fixed DirTree problem on Windows, spotted by
         Martin Thurn (http://rt.cpan.org/Ticket/Display.html?id=30781)
